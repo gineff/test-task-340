@@ -3,12 +3,19 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { Budget } from '@/components/budget';
 import { Deadline } from '@/components/deadline';
 import TextField from '@/components/text-field';
+import { CloseButton } from '@/components/close-button';
 
 export const RightSide = () => {
   const { control } = useFormContext<TaskRequestParams>();
 
   return (
-    <div className="h-full bg-blue-600 flex flex-col justify-center  p-8">
+    <div className="h-full bg-blue-600 flex flex-col justify-center p-8 relative">
+      <CloseButton
+        onClick={() => {
+          window.location.href = '/';
+        }}
+      />
+
       <h2 className="text-2xl font-bold mb-2 text-white">⚪ Правила для задачи</h2>
 
       <div className="flex gap-4">
@@ -24,7 +31,7 @@ export const RightSide = () => {
         render={({ field, fieldState }) => (
           <TextField
             label="Число фрилансеров"
-            type='number'
+            type="number"
             min={0}
             errorMessage={fieldState.error?.message}
             {...field}
