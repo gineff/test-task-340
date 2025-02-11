@@ -23,7 +23,7 @@ export const Deadline: FC<DeadlineProps> = ({ parentTheme = 'light', deadline_ke
           <TextField
             type="number"
             label="Дедлайн (дней)"
-            min={1}
+            min={0}
             errorMessage={fieldState.error?.message}
             {...field}
             parentTheme={parentTheme}

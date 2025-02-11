@@ -24,6 +24,8 @@ export const RightSide = () => {
         render={({ field, fieldState }) => (
           <TextField
             label="Число фрилансеров"
+            type='number'
+            min={0}
             errorMessage={fieldState.error?.message}
             {...field}
             parentTheme="dark"

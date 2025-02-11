@@ -66,6 +66,7 @@ export const Budget: FC<BudgetProps> = ({ minKey, maxKey, parentTheme = 'light' 
             label="&nbsp;"
             errorMessage={fieldState.error?.message}
             {...field}
+            min={0}
             onChange={(e) => {
               field.onChange(e);
               trigger(maxKey);
