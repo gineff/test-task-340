@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TaskRequestParams } from '@/app/react-hook-form/page';
+import { TaskRequestParams } from '@/app/react-hook-form/types';
 import { useFormContext } from 'react-hook-form';
 
 interface TagsItemProps {

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TaskRequestParams } from '@/app/react-hook-form/page';
+import { TaskRequestParams } from '@/app/react-hook-form/types';
 import { Controller, useFormContext } from 'react-hook-form';
 import TextField from '../text-field';
 
