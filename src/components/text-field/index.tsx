@@ -11,6 +11,8 @@ interface TextFieldProps
   onBlur?: (value: string) => void;
   errorMessage?: string;
   parentTheme?: 'light' | 'dark';
+  render?: () => React.ReactNode;
+  min?: number;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -22,6 +24,8 @@ const TextField: React.FC<TextFieldProps> = ({
   onChange,
   errorMessage,
   parentTheme = 'light',
+  render,
+  min,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (onChange) {
@@ -39,20 +43,27 @@ const TextField: React.FC<TextFieldProps> = ({
     className: `block w-full px-3 py-2 border ${
       errorMessage ? 'border-red-500' : isLight ? 'border-gray-300' : 'border-gray-500'
     } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 ${
-      isLight ? 'focus:border-indigo-500' : 'focus:ring-blue-300'
+      isLight ? 'focus:border-indigo-500' : 'focus:ring-blue-300 bg-gray-100'
     } sm:text-sm`,
   };
 
   return (
-    <div className="mb-4">
+    <div className={errorMessage ? '' : 'mb-[1.5rem]'}>
       <label
         htmlFor={name}
         className={`block ${isLight ? 'text-gray-700' : 'text-white'} text-sm font-medium  mb-1`}
       >
         {label}
       </label>
-      {type === 'textarea' ? <textarea {...commonProps} /> : <input {...commonProps} type={type} />}
-      {errorMessage && <p className="mt-2 text-sm text-red-600">{errorMessage}</p>}
+      <div className="relative">
+        {type === 'textarea' ? (
+          <textarea {...commonProps} />
+        ) : (
+          <input {...commonProps} type={type} {...(min !== undefined ? { min } : {})} />
+        )}
+        {render && render()}
+      </div>
+      {errorMessage && <p className="mt-2 text-xs text-red-600">{errorMessage}</p>}
     </div>
   );
 };
