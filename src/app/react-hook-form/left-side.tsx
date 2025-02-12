@@ -6,6 +6,7 @@ import { TagsBlock } from '@/components/tags-block';
 import { Deadline } from '@/components/deadline';
 import { FC } from 'react';
 import { Spinner } from '@/components/spinner';
+import { Token } from '@/components/token';
 
 interface LeftSideProps {
   isPending: boolean;
@@ -100,6 +101,8 @@ export const LeftSide: FC<LeftSideProps> = ({ isPending }) => {
           />
         </div>
 
+        <Token />
+        
         <button
           disabled={isPending}
           type="submit"

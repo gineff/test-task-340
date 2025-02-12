@@ -14,5 +14,6 @@ export interface TaskRequestParams {
   deadline_days: number;
   reminds: number;
   all_auto_responses: boolean;
+  token: string;
   rules: TaskRules;
 }

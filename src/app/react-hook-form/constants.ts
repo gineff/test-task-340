@@ -9,6 +9,7 @@ export const initialFormValues: TaskRequestParams = {
   deadline_days: 0,
   reminds: 0,
   all_auto_responses: false,
+  token: '',
   rules: {
     budget_from: '',
     budget_to: '',

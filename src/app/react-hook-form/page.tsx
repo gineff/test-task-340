@@ -7,21 +7,24 @@ import { initialFormValues } from './constants';
 import { TaskRequestParams } from './types';
 import { startTransition, useActionState } from 'react';
 import { useSnackbar } from '@/hooks/useSnackbar';
+import { useToken } from '@/hooks/useToken';
 
 export default function ReactHookForm() {
+  const { token, setToken } = useToken();
+  const { Snackbar, showSnackbar } = useSnackbar();
+
   const methods = useForm<TaskRequestParams>({
-    defaultValues: initialFormValues,
+    defaultValues: { ...initialFormValues, token },
     mode: 'onSubmit',
   });
-
-  const { Snackbar, showSnackbar } = useSnackbar();
 
   const [, formAction, isPending] = useActionState(
     async (_prevState: string | null, formData: TaskRequestParams) => {
       try {
         await createTask(formData);
         // clear form
-        methods.reset(initialFormValues);
+        setToken(formData.token);
+        methods.reset({ ...initialFormValues, token });
         showSnackbar({ message: 'Задача успешно опубликована', type: 'success' });
         return null;
       } catch (err) {
