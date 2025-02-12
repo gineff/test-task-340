@@ -18,10 +18,15 @@ export default function ReactHookForm() {
     mode: 'onSubmit',
   });
 
+  const allAutoResponses = methods.watch('all_auto_responses');
+
   const [, formAction, isPending] = useActionState(
     async (_prevState: string | null, formData: TaskRequestParams) => {
       try {
-        await createTask(formData);
+        await createTask(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          allAutoResponses ? (({ rules, ...withoutRules }) => withoutRules)(formData) : formData
+        );
         // clear form
         setToken(formData.token);
         methods.reset({ ...initialFormValues, token: formData.token });
@@ -49,12 +54,14 @@ export default function ReactHookForm() {
           className="w-full max-w-4xl flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden"
           onSubmit={onSubmit}
         >
-          <div className="md:w-1/2 ">
+          <div className={`md:w-${allAutoResponses ? 'full' : '1/2'}`}>
             <LeftSide isPending={isPending} />
           </div>
-          <div className="md:w-1/2 ">
-            <RightSide />
-          </div>
+          {!allAutoResponses && (
+            <div className={'md:w-1/2'}>
+              <RightSide />
+            </div>
+          )}
         </form>
       </FormProvider>
       <Snackbar />

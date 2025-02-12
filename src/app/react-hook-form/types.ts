@@ -15,5 +15,5 @@ export interface TaskRequestParams {
   reminds: number;
   all_auto_responses: boolean;
   token: string;
-  rules: TaskRules;
+  rules?: TaskRules;
 }
