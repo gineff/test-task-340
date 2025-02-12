@@ -17,7 +17,11 @@ export const Token = () => {
           <>
             <TextField label="Токен" errorMessage={fieldState.error?.message} {...field} />
             {
-              <p className="italic text-sm text-gray-400 mt-[-20px] mb-2">
+              <p
+                className={`italic text-sm text-gray-400 mt-[-20px] mb-2 ${
+                  fieldState.error && 'mt-[8px]'
+                }`}
+              >
                 Пример токена: 317ad1fc-e0a9-11ef-a978-0242ac120007
               </p>
             }
