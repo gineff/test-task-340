@@ -24,7 +24,7 @@ export default function ReactHookForm() {
         await createTask(formData);
         // clear form
         setToken(formData.token);
-        methods.reset({ ...initialFormValues, token });
+        methods.reset({ ...initialFormValues, token: formData.token });
         showSnackbar({ message: 'Задача успешно опубликована', type: 'success' });
         return null;
       } catch (err) {

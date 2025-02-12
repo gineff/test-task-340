@@ -1,31 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const useToken = () => {
+  const isBrowser = typeof window !== 'undefined';
+
   const [token, setTokenState] = useState<string>(() => {
-    return localStorage.getItem('token') || '';
+    return (isBrowser && localStorage.getItem('token')) || '';
   });
 
   const setToken = (newToken: string | null) => {
-    if (newToken) {
-      localStorage.setItem('token', newToken);
-      setTokenState(newToken);
-    } else {
-      localStorage.removeItem('token');
-      setTokenState('');
+    if (isBrowser) {
+      if (newToken) {
+        localStorage.setItem('token', newToken);
+      } else {
+        localStorage.removeItem('token');
+      }
+      setTokenState(newToken || '');
     }
   };
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setTokenState(localStorage.getItem('token') || '');
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
 
   return { token, setToken };
 };
