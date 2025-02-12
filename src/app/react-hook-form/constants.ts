@@ -17,3 +17,5 @@ export const initialFormValues: TaskRequestParams = {
     qty_freelancers: 0,
   },
 };
+
+export const API_PATH = 'https://deadlinetaskbot.productlove.ru/api/v1/tasks/client/newhardtask';
