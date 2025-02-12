@@ -4,8 +4,14 @@ import TextField from '@/components/text-field';
 import { Budget } from '@/components/budget';
 import { TagsBlock } from '@/components/tags-block';
 import { Deadline } from '@/components/deadline';
+import { FC } from 'react';
+import { Spinner } from '@/components/spinner';
 
-export const LeftSide = () => {
+interface LeftSideProps {
+  isPending: boolean;
+}
+
+export const LeftSide: FC<LeftSideProps> = ({ isPending }) => {
   const { control } = useFormContext<TaskRequestParams>();
 
   return (
@@ -95,10 +101,13 @@ export const LeftSide = () => {
         </div>
 
         <button
+          disabled={isPending}
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          className={`w-full py-2 rounded-md text-white transition ${
+            isPending ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+          }`}
         >
-          Создать задачу
+          Создать задачу {isPending && <Spinner />}
         </button>
       </div>
     </div>
