@@ -5,7 +5,6 @@ import { normalizeFromData } from './helpers';
 
 export const createTask = async (data: TaskRequestParams) => {
   try {
-
     const searchParams = toSearchParams(normalizeFromData(data));
     const url = `${API_PATH}?${searchParams}`;
 
@@ -20,7 +19,9 @@ export const createTask = async (data: TaskRequestParams) => {
     console.log('Ответ сервера:', result);
 
     if (!res.ok) {
-      throw new Error(`Ошибка запроса: ${res.status} ${res.statusText || result.error}`);
+      throw new Error(
+        `Ошибка запроса: ${res.status} ${res.statusText || result.error || 'Неопределенная ошибка'}`
+      );
     }
     return result;
   } catch (err) {

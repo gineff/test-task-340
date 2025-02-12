@@ -1,18 +1,25 @@
 import { TaskRequestParams } from '@/app/react-hook-form/types';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import TextField from '../text-field';
 import { useState } from 'react';
 import { TagsList } from './tags-list';
 
 export const TagsBlock = () => {
   const [inputValue, setInputValue] = useState('');
-  const { setValue, watch } = useFormContext<TaskRequestParams>();
+  const {
+    setValue,
+    watch,
+    control,
+    trigger,
+    formState: { errors },
+  } = useFormContext<TaskRequestParams>();
   const tags = watch('tags');
 
   const handleAddTag = () => {
     if (inputValue.trim() === '') return;
     setValue('tags', [...tags, inputValue.trim()]);
     setInputValue('');
+    trigger('tags');
   };
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,6 +37,7 @@ export const TagsBlock = () => {
         value={inputValue}
         onKeyUp={handleKeyUp}
         placeholder="Введите тег"
+        errorMessage={errors['tags']?.message}
         render={() => (
           <>
             <button
@@ -44,6 +52,15 @@ export const TagsBlock = () => {
             <TagsList tags={tags} />
           </>
         )}
+      />
+      <Controller
+        name="tags"
+        control={control}
+        rules={{
+          required: 'Добавьте хотя бы один тег',
+          validate: (value) => (value.length > 0 ? true : 'Добавьте хотя бы один тег'),
+        }}
+        render={({ field }) => <input type="hidden" {...field} />}
       />
     </>
   );

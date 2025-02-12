@@ -29,7 +29,11 @@ export default function ReactHookForm() {
         );
         // clear form
         setToken(formData.token);
-        methods.reset({ ...initialFormValues, token: formData.token });
+        methods.reset({
+          ...initialFormValues,
+          token: formData.token,
+          all_auto_responses: formData.all_auto_responses,
+        });
         showSnackbar({ message: 'Задача успешно опубликована', type: 'success' });
         return null;
       } catch (err) {
