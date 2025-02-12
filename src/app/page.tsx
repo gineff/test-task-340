@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div className="max-w-md w-full p-6 bg-white shadow-lg rounded-lg">
@@ -17,12 +19,12 @@ export default function Home() {
       </p>
       <ul className="list-none p-0">
         <li className="mb-2">
-          <a
+          <Link
             href="/react-hook-form"
             className="block px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-200 text-center"
           >
             Форма с использованием react-hook-form
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
