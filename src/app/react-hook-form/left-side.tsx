@@ -62,13 +62,6 @@ export const LeftSide: FC<LeftSideProps> = ({ isPending }) => {
         <Controller
           name={'description'}
           control={control}
-          rules={{
-            required: 'Это поле обязательно',
-            minLength: {
-              value: 3,
-              message: 'Минимум 3 символа',
-            },
-          }}
           render={({ field, fieldState }) => (
             <TextField
               label="Описание задачи"

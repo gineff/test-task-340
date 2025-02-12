@@ -4,17 +4,15 @@ import { Budget } from '@/components/budget';
 import { Deadline } from '@/components/deadline';
 import TextField from '@/components/text-field';
 import { CloseButton } from '@/components/close-button';
+import { useRouter } from 'next/navigation';
 
 export const RightSide = () => {
   const { control } = useFormContext<TaskRequestParams>();
+  const router = useRouter();
 
   return (
     <div className="h-full bg-blue-600 flex flex-col justify-center p-8 relative">
-      <CloseButton
-        onClick={() => {
-          window.location.href = '/';
-        }}
-      />
+      <CloseButton onClick={() => router.push('/')} />
 
       <h2 className="text-2xl font-bold mb-2 text-white">⚪ Правила для задачи</h2>
 
