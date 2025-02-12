@@ -6,6 +6,6 @@ const normalizeData = (data) => {
 
 export const createTask = async (data: TaskRequestParams) => {
   console.log(data);
-  return await new Promise((res) => setTimeout(res, 3000));
-  //throw new Error('error 12');
+  await new Promise((res) => setTimeout(res, 3000));
+  throw new Error('error 12');
 };

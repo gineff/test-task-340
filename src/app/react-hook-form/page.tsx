@@ -5,9 +5,8 @@ import { RightSide } from './right-side';
 import { createTask } from './actions';
 import { initialFormValues } from './constants';
 import { TaskRequestParams } from './types';
-import { startTransition, useActionState, useEffect } from 'react';
-
-
+import { startTransition, useActionState } from 'react';
+import { useSnackbar } from '@/hooks/useSnackbar';
 
 export default function ReactHookForm() {
   const methods = useForm<TaskRequestParams>({
@@ -15,25 +14,24 @@ export default function ReactHookForm() {
     mode: 'onSubmit',
   });
 
-  const [error, formAction, isPending] = useActionState(
-    async (prevState: string | null, formData: TaskRequestParams) => {
+  const { Snackbar, showSnackbar } = useSnackbar();
+
+  const [, formAction, isPending] = useActionState(
+    async (_prevState: string | null, formData: TaskRequestParams) => {
       try {
         await createTask(formData);
         // clear form
         methods.reset(initialFormValues);
+        showSnackbar({ message: 'Задача успешно опубликована', type: 'success' });
         return null;
       } catch (err) {
-        return err instanceof Error ? err.message : 'Неизвестная ошибка';
+        const message = err instanceof Error ? err.message : 'Неизвестная ошибка';
+        showSnackbar({ message, type: 'error' });
+        return message;
       }
     },
     null
   );
-
-  useEffect(() => {
-    if (error) {
-      alert(error);
-    }
-  }, [error]);
 
   const onSubmit = methods.handleSubmit((data) => {
     startTransition(() => {
@@ -56,6 +54,7 @@ export default function ReactHookForm() {
           </div>
         </form>
       </FormProvider>
+      <Snackbar />
     </div>
   );
 }
