@@ -11,7 +11,7 @@ export interface TaskRequestParams {
   tags: string[];
   budget_from: number | string;
   budget_to: number | string;
-  deadline_days: number;
+  deadline: number;
   reminds: number;
   all_auto_responses: boolean;
   token: string;

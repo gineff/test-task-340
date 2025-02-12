@@ -5,7 +5,7 @@ import TextField from '../text-field';
 
 interface DeadlineProps {
   parentTheme?: 'light' | 'dark';
-  deadline_key: 'deadline_days' | 'rules.deadline_days'
+  deadline_key: 'deadline' | 'rules.deadline_days'
 }
 
 export const Deadline: FC<DeadlineProps> = ({ parentTheme = 'light', deadline_key }) => {

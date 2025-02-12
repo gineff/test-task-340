@@ -77,7 +77,7 @@ export const LeftSide: FC<LeftSideProps> = ({ isPending }) => {
         <TagsBlock />
 
         <div className="flex gap-4">
-          <Deadline deadline_key="deadline_days" />
+          <Deadline deadline_key="deadline" />
 
           <Controller
             name={'reminds'}

@@ -6,7 +6,7 @@ export const initialFormValues: TaskRequestParams = {
   tags: [],
   budget_from: '',
   budget_to: '',
-  deadline_days: 0,
+  deadline: 0,
   reminds: 0,
   all_auto_responses: false,
   token: '',
